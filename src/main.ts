@@ -52,7 +52,7 @@ class PNGMetadataExtractor {
     // ファイル選択イベント（input要素）
     fileInput.addEventListener("change", (e: Event) => {
       const target = e.target as HTMLInputElement
-      if (target.files && target.files.length > 0) {
+      if (target.files && target.files.length > 0 && target.files[0]) {
         this.handleFile(target.files[0])
       }
     })
@@ -84,7 +84,7 @@ class PNGMetadataExtractor {
       uploadArea.classList.remove("drag-over") // ドラッグスタイルを解除
 
       // ドロップされたファイルを処理
-      if (e.dataTransfer?.files && e.dataTransfer.files.length > 0) {
+      if (e.dataTransfer?.files && e.dataTransfer.files.length > 0 && e.dataTransfer.files[0]) {
         this.handleFile(e.dataTransfer.files[0])
       }
     })

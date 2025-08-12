@@ -34,6 +34,7 @@ export class PNGAnalyzer {
    * @returns 32ビット整数値
    */
   bytesToUint32(bytes: Uint8Array, offset = 0): number {
+    if (offset + 3 >= bytes.length) return 0
     return (bytes[offset] << 24) | (bytes[offset + 1] << 16) | (bytes[offset + 2] << 8) | bytes[offset + 3]
   }
 
@@ -44,6 +45,7 @@ export class PNGAnalyzer {
    * @returns 16ビット整数値
    */
   bytesToUint16(bytes: Uint8Array, offset = 0): number {
+    if (offset + 1 >= bytes.length) return 0
     return (bytes[offset] << 8) | bytes[offset + 1]
   }
 
@@ -79,6 +81,10 @@ export class PNGAnalyzer {
    * @returns 画像情報オブジェクト
    */
   parseIHDR(data: Uint8Array): PNGImageInfo {
+    if (data.length < 13) {
+      throw new Error("IHDRチャンクのデータが不正です")
+    }
+
     return {
       width: this.bytesToUint32(data, 0), // 画像の幅（ピクセル）
       height: this.bytesToUint32(data, 4), // 画像の高さ（ピクセル）

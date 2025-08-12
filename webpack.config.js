@@ -24,7 +24,19 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.scss$/,
-          use: [isProduction ? MiniCssExtractPlugin.loader : "style-loader", "css-loader", "sass-loader"],
+          use: [
+            isProduction ? MiniCssExtractPlugin.loader : "style-loader",
+            "css-loader",
+            {
+              loader: "sass-loader",
+              options: {
+                api: "modern-compiler", // 新しいコンパイラAPIを使用
+                sassOptions: {
+                  silenceDeprecations: ["legacy-js-api"], // 非推奨警告を抑制
+                },
+              },
+            },
+          ],
         },
         {
           test: /\.css$/,

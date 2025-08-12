@@ -340,6 +340,8 @@ export class ImagePreview {
 
       // 全ピクセルを走査
       for (let i = 0; i < data.length; i += 4) {
+        if (i + 3 >= data.length) break
+
         const r = data[i] // 赤成分
         const g = data[i + 1] // 緑成分
         const b = data[i + 2] // 青成分
@@ -407,11 +409,12 @@ export class ImagePreview {
     if (dominantContainer) {
       dominantContainer.innerHTML = dominantColors
         .map((color) => {
-          const rgb = color.match(/\d+/g) // RGB値を抽出
+          const rgb = color.match(/\d+/g)
+          const rgbValues = rgb && rgb.length >= 3 ? rgb.slice(0, 3).join(",") : "N/A"
           return `
                 <div class="dominant-color">
                     <div class="dominant-swatch" style="background-color: ${color};" title="${color}"></div>
-                    <div class="dominant-value">${rgb ? rgb.join(",") : ""}</div>
+                    <div class="dominant-value">${rgbValues}</div>
                 </div>
             `
         })
