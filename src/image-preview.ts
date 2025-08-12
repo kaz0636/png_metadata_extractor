@@ -342,10 +342,10 @@ export class ImagePreview {
       for (let i = 0; i < data.length; i += 4) {
         if (i + 3 >= data.length) break
 
-        const r = data[i] // 赤成分
-        const g = data[i + 1] // 緑成分
-        const b = data[i + 2] // 青成分
-        const a = data[i + 3] // アルファ成分
+        const r = data[i] ?? 0 // 赤成分
+        const g = data[i + 1] ?? 0 // 緑成分
+        const b = data[i + 2] ?? 0 // 青成分
+        const a = data[i + 3] ?? 0 // アルファ成分
 
         // 透明でないピクセルのみ処理
         if (a > 128) {
@@ -413,9 +413,9 @@ export class ImagePreview {
           let rgbValues = "N/A"
 
           if (rgb && rgb.length >= 3) {
-            const r = rgb[0] || "0"
-            const g = rgb[1] || "0"
-            const b = rgb[2] || "0"
+            const r = rgb.at(0) ?? "0"
+            const g = rgb.at(1) ?? "0"
+            const b = rgb.at(2) ?? "0"
             rgbValues = `${r},${g},${b}`
           }
 
