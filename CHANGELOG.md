@@ -1,36 +1,40 @@
-# Changelog
+# 変更履歴
 
-All notable changes to this project will be documented in this file.
+このプロジェクトのすべての注目すべき変更は、このファイルに記録されます。
 
 ## [2.0.0] - 2024-01-XX
 
-### Added
-- Complete TypeScript conversion with full type safety
-- Modern SCSS styling with variables and mixins
-- Webpack-based build system with hot reload
-- ESLint and Prettier for code quality
-- Comprehensive development environment setup
-- VS Code configuration for optimal development experience
+### 追加
 
-### Changed
-- Migrated from vanilla JavaScript to TypeScript
-- Converted CSS to SCSS with better organization
-- Updated build process to use modern tooling
-- Improved code structure and maintainability
+- 完全な型安全性を備えたTypeScriptへの完全な変換
+- 変数とmixinを使用したモダンなSCSSスタイリング
+- ホットリロードを備えたWebpackベースのビルドシステム
+- コード品質のためのESLintとPrettier
+- 包括的な開発環境のセットアップ
+- 最適な開発体験のためのVS Code設定
 
-### Technical Improvements
-- Added proper type definitions for all components
-- Implemented modern ES6+ features throughout
-- Enhanced error handling and null safety
-- Optimized bundle size and loading performance
-- Added source maps for better debugging
+### 変更
 
-## [1.0.0] - Previous Version
+- バニラJavaScriptからTypeScriptへ移行
+- CSSをより良い構成でSCSSに変換
+- 最新のツールを使用するようにビルドプロセスを更新
+- コード構造と保守性の向上
 
-### Features
-- PNG metadata extraction and analysis
-- Interactive image preview with zoom/pan
-- Comprehensive chunk information display
-- Color analysis and dominant color extraction
-- JSON export functionality
-- Responsive design for all devices
+### 技術的改善
+
+- すべてのコンポーネントに適切な型定義を追加
+- 全体的にモダンなES6+機能を実装
+- エラー処理とnull安全性の強化
+- バンドルサイズと読み込みパフォーマンスの最適化
+- デバッグを改善するためのソースマップを追加
+
+## [1.0.0] - 以前のバージョン
+
+### 機能
+
+- PNGメタデータ抽出と分析
+- ズーム/パン機能を備えたインタラクティブな画像プレビュー
+- 包括的なチャンク情報表示
+- 色分析と主要な色の抽出
+- JSONエクスポート機能
+- すべてのデバイスに対応するレスポンシブデザイン
