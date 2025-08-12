@@ -89,7 +89,7 @@ export class PNGAnalyzer {
       width: this.bytesToUint32(data, 0), // 画像の幅（ピクセル）
       height: this.bytesToUint32(data, 4), // 画像の高さ（ピクセル）
       bitDepth: data[8], // ビット深度（1, 2, 4, 8, 16）
-      colorType: this.colorTypes[data[9]] || `不明 (${data[9]})`, // 色タイプ
+      colorType: this.colorTypes[data[9] as keyof ColorTypes] || `不明 (${data[9]})`, // 色タイプ
       compressionMethod: data[10], // 圧縮方式（常に0）
       filterMethod: data[11], // フィルター方式（常に0）
       interlaceMethod: data[12], // インターレース方式（0=なし, 1=Adam7）
@@ -166,6 +166,10 @@ export class PNGAnalyzer {
     const hour = data[4] // 時（1バイト、0-23）
     const minute = data[5] // 分（1バイト、0-59）
     const second = data[6] // 秒（1バイト、0-60）
+
+    if (month == null || day == null || hour == null || minute == null || second == null) {
+      return null
+    }
 
     return {
       year,

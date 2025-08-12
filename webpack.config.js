@@ -30,7 +30,7 @@ module.exports = (env, argv) => {
             {
               loader: "sass-loader",
               options: {
-                api: "modern-compiler", // 新しいコンパイラAPIを使用
+                api: "modern", // "modern-compiler" から "modern" に変更
                 sassOptions: {
                   silenceDeprecations: ["legacy-js-api"], // 非推奨警告を抑制
                 },
