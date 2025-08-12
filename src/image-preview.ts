@@ -413,9 +413,9 @@ export class ImagePreview {
           let rgbValues = "N/A"
 
           if (rgb && rgb.length >= 3) {
-            const r = rgb[0]!
-            const g = rgb[1]!
-            const b = rgb[2]!
+            const r = rgb[0] || "0"
+            const g = rgb[1] || "0"
+            const b = rgb[2] || "0"
             rgbValues = `${r},${g},${b}`
           }
 
