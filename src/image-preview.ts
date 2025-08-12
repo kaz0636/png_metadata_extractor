@@ -412,16 +412,11 @@ export class ImagePreview {
           const rgb = color.match(/\d+/g)
           let rgbValues = "N/A"
 
-          // 正規表現マッチ結果が存在し、3つ以上の値がある場合のみ処理
           if (rgb && rgb.length >= 3) {
-            const r = rgb[0]
-            const g = rgb[1]
-            const b = rgb[2]
-
-            // 各RGB値が存在することを確認
-            if (r !== undefined && g !== undefined && b !== undefined) {
-              rgbValues = `${r},${g},${b}`
-            }
+            const r = rgb[0]!
+            const g = rgb[1]!
+            const b = rgb[2]!
+            rgbValues = `${r},${g},${b}`
           }
 
           return `
