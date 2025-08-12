@@ -30,31 +30,35 @@ PNGファイルから詳細なメタデータを抽出・解析するモダン�
 ### インストール
 
 1. リポジトリをクローン:
-\`\`\`bash
+
+```bash
 git clone <repository-url>
 cd png-metadata-extractor
-\`\`\`
+```
 
 2. 依存関係をインストール:
-\`\`\`bash
+
+```bash
 npm install
-\`\`\`
+```
 
 ### 開発
 
 開発サーバーを起動:
-\`\`\`bash
+
+```bash
 npm run dev
-\`\`\`
+```
 
 アプリケーションは `http://localhost:3000` でホットリロード機能付きで利用できます。
 
 ### 本番用ビルド
 
 本番用ビルドを作成:
-\`\`\`bash
+
+```bash
 npm run build
-\`\`\`
+```
 
 ビルドされたファイルは `dist/` ディレクトリに出力されます。
 
@@ -67,7 +71,7 @@ npm run build
 
 ## プロジェクト構造
 
-\`\`\`
+```text
 src/
 ├── index.html          # メインHTMLテンプレート
 ├── main.ts            # アプリケーションエントリーポイント
@@ -80,7 +84,7 @@ dist/                  # ビルドファイル（生成される）
 webpack.config.js      # Webpack設定
 tsconfig.json         # TypeScript設定
 package.json          # プロジェクト依存関係とスクリプト
-\`\`\`
+```
 
 ## 使用方法
 
