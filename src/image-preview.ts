@@ -410,8 +410,20 @@ export class ImagePreview {
       dominantContainer.innerHTML = dominantColors
         .map((color) => {
           const rgb = color.match(/\d+/g)
-          const rgbValues =
-            rgb && rgb.length >= 3 && rgb[0] && rgb[1] && rgb[2] ? `${rgb[0]},${rgb[1]},${rgb[2]}` : "N/A"
+          let rgbValues = "N/A"
+
+          // 正規表現マッチ結果が存在し、3つ以上の値がある場合のみ処理
+          if (rgb && rgb.length >= 3) {
+            const r = rgb[0]
+            const g = rgb[1]
+            const b = rgb[2]
+
+            // 各RGB値が存在することを確認
+            if (r !== undefined && g !== undefined && b !== undefined) {
+              rgbValues = `${r},${g},${b}`
+            }
+          }
+
           return `
                 <div class="dominant-color">
                     <div class="dominant-swatch" style="background-color: ${color};" title="${color}"></div>
