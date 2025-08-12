@@ -152,11 +152,13 @@ export class PNGAnalyzer {
 
         if (parts.length >= 4) {
           const keyword = this.bytesToString(data, 0, parts[0]) // キーワード
-          const compressionFlagByte = data[parts[0] + 1]
+          const compressionFlagByte = parts[0] != null && parts[0] + 1 < data.length ? data[parts[0] + 1] : undefined
           const compressionFlag = compressionFlagByte != null ? compressionFlagByte : 0 // 圧縮フラグ
-          const languageTag = this.bytesToString(data, parts[1] + 1, parts[2]) // 言語タグ
-          const translatedKeyword = this.bytesToString(data, parts[2] + 1, parts[3]) // 翻訳されたキーワード
-          const text = this.bytesToString(data, parts[3] + 1) // テキスト本体
+          const languageTag =
+            parts[1] != null && parts[2] != null ? this.bytesToString(data, parts[1] + 1, parts[2]) : "" // 言語タグ
+          const translatedKeyword =
+            parts[2] != null && parts[3] != null ? this.bytesToString(data, parts[2] + 1, parts[3]) : "" // 翻訳されたキーワード
+          const text = parts[3] != null ? this.bytesToString(data, parts[3] + 1) : "" // テキスト本体
 
           result[keyword] = {
             text,
