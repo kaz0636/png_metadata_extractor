@@ -35,7 +35,12 @@ export class PNGAnalyzer {
    */
   bytesToUint32(bytes: Uint8Array, offset = 0): number {
     if (offset + 3 >= bytes.length) return 0
-    return (bytes[offset] << 24) | (bytes[offset + 1] << 16) | (bytes[offset + 2] << 8) | bytes[offset + 3]
+    const b0 = bytes[offset]
+    const b1 = bytes[offset + 1]
+    const b2 = bytes[offset + 2]
+    const b3 = bytes[offset + 3]
+    if (b0 == null || b1 == null || b2 == null || b3 == null) return 0
+    return (b0 << 24) | (b1 << 16) | (b2 << 8) | b3
   }
 
   /**
@@ -46,7 +51,10 @@ export class PNGAnalyzer {
    */
   bytesToUint16(bytes: Uint8Array, offset = 0): number {
     if (offset + 1 >= bytes.length) return 0
-    return (bytes[offset] << 8) | bytes[offset + 1]
+    const b0 = bytes[offset]
+    const b1 = bytes[offset + 1]
+    if (b0 == null || b1 == null) return 0
+    return (b0 << 8) | b1
   }
 
   /**
@@ -85,14 +93,30 @@ export class PNGAnalyzer {
       throw new Error("IHDRチャンクのデータが不正です")
     }
 
+    const bitDepth = data[8]
+    const colorTypeValue = data[9]
+    const compressionMethod = data[10]
+    const filterMethod = data[11]
+    const interlaceMethod = data[12]
+
+    if (
+      bitDepth == null ||
+      colorTypeValue == null ||
+      compressionMethod == null ||
+      filterMethod == null ||
+      interlaceMethod == null
+    ) {
+      throw new Error("IHDRチャンクのデータが不正です")
+    }
+
     return {
       width: this.bytesToUint32(data, 0), // 画像の幅（ピクセル）
       height: this.bytesToUint32(data, 4), // 画像の高さ（ピクセル）
-      bitDepth: data[8], // ビット深度（1, 2, 4, 8, 16）
-      colorType: this.colorTypes[data[9] as keyof ColorTypes] || `不明 (${data[9]})`, // 色タイプ
-      compressionMethod: data[10], // 圧縮方式（常に0）
-      filterMethod: data[11], // フィルター方式（常に0）
-      interlaceMethod: data[12], // インターレース方式（0=なし, 1=Adam7）
+      bitDepth, // ビット深度（1, 2, 4, 8, 16）
+      colorType: this.colorTypes[colorTypeValue as keyof ColorTypes] || `不明 (${colorTypeValue})`, // 色タイプ
+      compressionMethod, // 圧縮方式（常に0）
+      filterMethod, // フィルター方式（常に0）
+      interlaceMethod, // インターレース方式（0=なし, 1=Adam7）
     }
   }
 
@@ -128,7 +152,8 @@ export class PNGAnalyzer {
 
         if (parts.length >= 4) {
           const keyword = this.bytesToString(data, 0, parts[0]) // キーワード
-          const compressionFlag = data[parts[0] + 1] // 圧縮フラグ
+          const compressionFlagByte = data[parts[0] + 1]
+          const compressionFlag = compressionFlagByte != null ? compressionFlagByte : 0 // 圧縮フラグ
           const languageTag = this.bytesToString(data, parts[1] + 1, parts[2]) // 言語タグ
           const translatedKeyword = this.bytesToString(data, parts[2] + 1, parts[3]) // 翻訳されたキーワード
           const text = this.bytesToString(data, parts[3] + 1) // テキスト本体

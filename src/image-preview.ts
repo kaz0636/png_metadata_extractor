@@ -410,7 +410,8 @@ export class ImagePreview {
       dominantContainer.innerHTML = dominantColors
         .map((color) => {
           const rgb = color.match(/\d+/g)
-          const rgbValues = rgb && rgb.length >= 3 ? rgb.slice(0, 3).join(",") : "N/A"
+          const rgbValues =
+            rgb && rgb.length >= 3 && rgb[0] && rgb[1] && rgb[2] ? `${rgb[0]},${rgb[1]},${rgb[2]}` : "N/A"
           return `
                 <div class="dominant-color">
                     <div class="dominant-swatch" style="background-color: ${color};" title="${color}"></div>
