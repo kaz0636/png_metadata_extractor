@@ -1,0 +1,612 @@
+// 変数定義
+$primary-color: #3b82f6;
+$secondary-color: #6b7280;
+$success-color: #10b981;
+$warning-color: #f59e0b;
+$error-color: #dc2626;
+$purple-color: #8b5cf6;
+
+$background-gradient: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%);
+$card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+$border-color: #e5e7eb;
+$text-primary: #1f2937;
+$text-secondary: #6b7280;
+
+// フォント設定
+$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+$font-mono: monospace;
+
+// スペーシング
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 0.75rem;
+$spacing-lg: 1rem;
+$spacing-xl: 1.5rem;
+$spacing-2xl: 2rem;
+
+// ボーダー半径
+$border-radius-sm: 0.25rem;
+$border-radius-md: 0.375rem;
+$border-radius-lg: 0.5rem;
+$border-radius-xl: 0.75rem;
+
+// ミックスイン
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin card-style {
+  background: white;
+  border-radius: $border-radius-lg;
+  box-shadow: $card-shadow;
+}
+
+@mixin button-base {
+  background: transparent;
+  border: 1px solid $border-color;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $border-radius-md;
+  cursor: pointer;
+  transition: all 0.2s;
+  
+  &:hover {
+    background-color: #f3f4f6;
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// ベーススタイル
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family;
+  background: $background-gradient;
+  min-height: 100vh;
+  padding: $spacing-lg;
+}
+
+// アプリケーションコンテナ
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+// ヘッダーセクション
+.header {
+  text-align: center;
+  margin-bottom: $spacing-lg;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: $text-primary;
+    margin-bottom: $spacing-sm;
+  }
+
+  p {
+    color: $text-secondary;
+    font-size: 1.1rem;
+  }
+}
+
+// アップロードカード
+.upload-card {
+  @include card-style;
+  padding: $spacing-xl;
+}
+
+.upload-area {
+  border: 2px dashed $border-color;
+  border-radius: $border-radius-lg;
+  padding: $spacing-2xl;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: #9ca3af;
+    background-color: #f9fafb;
+  }
+
+  &.drag-over {
+    border-color: $primary-color;
+    background-color: #eff6ff;
+  }
+}
+
+.upload-icon {
+  font-size: 3rem;
+  color: #9ca3af;
+  margin-bottom: $spacing-lg;
+}
+
+.upload-text {
+  color: $text-secondary;
+  margin-bottom: $spacing-lg;
+}
+
+.upload-button {
+  @include button-base;
+
+  i {
+    margin-right: $spacing-sm;
+  }
+}
+
+// ローディング表示
+.loading {
+  @include flex-center;
+  gap: $spacing-sm;
+  margin-top: $spacing-lg;
+  color: $primary-color;
+}
+
+.spinner {
+  width: $spacing-lg;
+  height: $spacing-lg;
+  border: 2px solid $border-color;
+  border-top: 2px solid $primary-color;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// エラー表示
+.error {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: $error-color;
+  padding: $spacing-md;
+  border-radius: $border-radius-md;
+  margin-top: $spacing-lg;
+  font-size: 0.875rem;
+}
+
+// 結果セクション
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+// サマリーカード
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: $spacing-lg;
+}
+
+.summary-card {
+  @include card-style;
+  padding: $spacing-lg;
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.card-icon {
+  font-size: 1.25rem;
+
+  &.blue { color: $primary-color; }
+  &.green { color: $success-color; }
+  &.purple { color: $purple-color; }
+  &.orange { color: $warning-color; }
+}
+
+.card-content {
+  flex: 1;
+}
+
+.card-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $text-secondary;
+  margin-bottom: $spacing-xs;
+}
+
+.card-value {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: $text-primary;
+}
+
+// 詳細カード
+.details-card {
+  @include card-style;
+  overflow: hidden;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-xl;
+  border-bottom: 1px solid $border-color;
+
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: $text-primary;
+  }
+}
+
+.export-button {
+  @include button-base;
+  font-size: 0.875rem;
+
+  i {
+    margin-right: $spacing-sm;
+  }
+}
+
+// タブシステム
+.tabs {
+  padding: $spacing-xl;
+}
+
+.tab-list {
+  display: flex;
+  background-color: #f3f4f6;
+  border-radius: $border-radius-md;
+  padding: $spacing-xs;
+  margin-bottom: $spacing-lg;
+  overflow-x: auto;
+}
+
+.tab-button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $text-secondary;
+  transition: all 0.2s;
+  white-space: nowrap;
+
+  &.active {
+    background: white;
+    color: $text-primary;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.tab-content {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+// 情報グリッド
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: $spacing-lg;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-md;
+  background-color: #f9fafb;
+  border-radius: $border-radius-lg;
+}
+
+.info-label {
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.info-value {
+  background-color: $border-color;
+  color: #374151;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-sm;
+  font-size: 0.875rem;
+}
+
+// チャンク表示
+.chunk-item {
+  border: 1px solid $border-color;
+  border-radius: $border-radius-lg;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-sm;
+}
+
+.chunk-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-sm;
+}
+
+.chunk-type {
+  background-color: #f3f4f6;
+  border: 1px solid $border-color;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-sm;
+  font-family: $font-mono;
+  font-size: 0.875rem;
+}
+
+.chunk-info {
+  font-size: 0.875rem;
+  color: $text-secondary;
+}
+
+.chunk-crc {
+  background-color: $border-color;
+  color: #374151;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-sm;
+  font-family: $font-mono;
+  font-size: 0.875rem;
+}
+
+.chunk-data {
+  font-family: $font-mono;
+  font-size: 0.75rem;
+  background-color: #f3f4f6;
+  padding: $spacing-sm;
+  border-radius: $border-radius-sm;
+  overflow-x: auto;
+  word-break: break-all;
+}
+
+// 画像プレビュー
+.preview-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: $spacing-lg;
+  margin-bottom: $spacing-xl;
+}
+
+.preview-card {
+  background: white;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-lg;
+  padding: $spacing-lg;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.preview-icon {
+  font-size: 1rem;
+
+  &.blue { color: $primary-color; }
+  &.green { color: $success-color; }
+  &.purple { color: $purple-color; }
+  &.orange { color: $warning-color; }
+}
+
+.preview-content {
+  flex: 1;
+}
+
+.preview-label {
+  font-size: 0.75rem;
+  color: $text-secondary;
+  margin-bottom: $spacing-xs;
+}
+
+.preview-value {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+// 画像コンテナ
+.image-container {
+  background: white;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  margin-bottom: $spacing-xl;
+}
+
+.image-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-lg;
+  border-bottom: 1px solid $border-color;
+  background-color: #f9fafb;
+}
+
+.image-title {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-weight: 600;
+}
+
+.zoom-badge {
+  background-color: $border-color;
+  color: #374151;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-sm;
+  font-size: 0.75rem;
+  margin-left: $spacing-sm;
+}
+
+.image-controls {
+  display: flex;
+  gap: $spacing-sm;
+}
+
+.control-button {
+  @include button-base;
+  padding: $spacing-sm;
+}
+
+.image-viewport {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  background: #f9fafb;
+  @include flex-center;
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+  user-select: none;
+}
+
+.zoom-info {
+  position: absolute;
+  bottom: $spacing-lg;
+  left: $spacing-lg;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-sm;
+  font-size: 0.875rem;
+}
+
+// 色解析
+.color-analysis {
+  margin-top: $spacing-xl;
+
+  h3, h4 {
+    font-weight: 600;
+    margin-bottom: $spacing-md;
+  }
+}
+
+.color-section {
+  margin-bottom: $spacing-xl;
+}
+
+.average-color {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.color-swatch {
+  width: 3rem;
+  height: 3rem;
+  border-radius: $border-radius-sm;
+  border: 2px solid $border-color;
+}
+
+.color-info {
+  flex: 1;
+}
+
+.color-value {
+  font-family: $font-mono;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.color-description {
+  font-size: 0.75rem;
+  color: $text-secondary;
+}
+
+.dominant-colors {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: $spacing-sm;
+}
+
+.dominant-color {
+  text-align: center;
+}
+
+.dominant-swatch {
+  width: 2rem;
+  height: 2rem;
+  border-radius: $border-radius-sm;
+  border: 1px solid $border-color;
+  margin: 0 auto $spacing-xs;
+}
+
+.dominant-value {
+  font-size: 0.625rem;
+  font-family: $font-mono;
+  color: $text-secondary;
+}
+
+// 空状態
+.empty-state {
+  text-align: center;
+  padding: $spacing-2xl;
+  color: $text-secondary;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: $spacing-lg;
+  opacity: 0.5;
+}
+
+// JSNView カスタマイズ
+#fullJsonContainer {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+// レスポンシブデザイン
+@media (max-width: 768px) {
+  .app {
+    padding: $spacing-sm;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .tab-list {
+    flex-wrap: wrap;
+  }
+
+  .tab-button {
+    flex: none;
+    min-width: 80px;
+  }
+
+  .summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-header {
+    flex-direction: column;
+    gap: $spacing-lg;
+    align-items: stretch;
+  }
+
+  .image-controls {
+    flex-wrap: wrap;
+  }
+}

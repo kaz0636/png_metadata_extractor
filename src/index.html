@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PNG Metadata Extractor</title>
+    <!-- Removed direct CSS link - webpack will inject the bundled CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- JSNView Library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsnview/build/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsnview/build/index.min.js"></script>
+</head>
+<body>
+    <div class="app">
+         <!-- Header -->
+        <div class="header">
+            <h1>PNG Metadata Extractor</h1>
+            <p>Upload a PNG file to extract detailed metadata and chunk information</p>
+        </div>
+
+         <!-- Upload Area -->
+        <div class="upload-card">
+            <div class="upload-area" id="uploadArea">
+                <i class="fas fa-file-image upload-icon"></i>
+                <p class="upload-text">Drag & drop a PNG file here, or click to select</p>
+                <button class="upload-button" id="uploadButton">
+                    <i class="fas fa-upload"></i>
+                    Choose File
+                </button>
+                <input type="file" id="fileInput" accept=".png,image/png" style="display: none;">
+            </div>
+
+            <div class="loading" id="loading" style="display: none;">
+                <div class="spinner"></div>
+                <span>Analyzing PNG file...</span>
+            </div>
+
+            <div class="error" id="error" style="display: none;"></div>
+        </div>
+
+         <!-- Results -->
+        <div class="results" id="results" style="display: none;">
+             <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <i class="fas fa-file-image card-icon blue"></i>
+                    <div class="card-content">
+                        <p class="card-label">File Size</p>
+                        <p class="card-value" id="fileSize">-</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <i class="fas fa-ruler card-icon green"></i>
+                    <div class="card-content">
+                        <p class="card-label">Dimensions</p>
+                        <p class="card-value" id="dimensions">-</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <i class="fas fa-palette card-icon purple"></i>
+                    <div class="card-content">
+                        <p class="card-label">Color Type</p>
+                        <p class="card-value" id="colorType">-</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <i class="fas fa-cube card-icon orange"></i>
+                    <div class="card-content">
+                        <p class="card-label">Chunks</p>
+                        <p class="card-value" id="chunkCount">-</p>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Detailed Information -->
+            <div class="details-card">
+                <div class="card-header">
+                    <h2>Detailed Analysis</h2>
+                    <button class="export-button" id="exportButton">
+                        <i class="fas fa-download"></i>
+                        Export JSON
+                    </button>
+                </div>
+
+                 <!-- Tabs -->
+                <div class="tabs">
+                    <div class="tab-list">
+                        <button class="tab-button active" data-tab="preview">Preview</button>
+                        <button class="tab-button" data-tab="image-info">Image Info</button>
+                        <button class="tab-button" data-tab="chunks">Chunks</button>
+                        <button class="tab-button" data-tab="metadata">Metadata</button>
+                        <button class="tab-button" data-tab="timestamp">Timestamp</button>
+                        <button class="tab-button" data-tab="raw-data">Raw Data</button>
+                        <button class="tab-button" data-tab="full-json">Full JSON</button>
+                    </div>
+
+                     <!-- Tab Contents -->
+                    <div class="tab-content active" id="tab-preview">
+                        <div id="imagePreview"></div>
+                    </div>
+
+                    <div class="tab-content" id="tab-image-info">
+                        <div class="info-grid" id="imageInfoGrid"></div>
+                    </div>
+
+                    <div class="tab-content" id="tab-chunks">
+                        <div id="chunksContainer"></div>
+                    </div>
+
+                    <div class="tab-content" id="tab-metadata">
+                        <div id="metadataContainer"></div>
+                    </div>
+
+                    <div class="tab-content" id="tab-timestamp">
+                        <div id="timestampContainer"></div>
+                    </div>
+
+                    <div class="tab-content" id="tab-raw-data">
+                        <div id="rawDataContainer"></div>
+                    </div>
+
+                    <div class="tab-content" id="tab-full-json">
+                        <div id="fullJsonContainer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Removed direct script reference - webpack will inject the bundled JavaScript -->
+</body>
+</html>
