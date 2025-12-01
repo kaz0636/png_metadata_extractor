@@ -44,3 +44,10 @@ coverage/
 # Temporary folders
 tmp/
 temp/
+
+# AI instructions (not for version control)
+.github/
+AGENTS.md
+
+# Documentation (development process documents)
+docs/
