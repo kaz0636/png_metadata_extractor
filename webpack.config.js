@@ -75,6 +75,7 @@ module.exports = (env, argv) => {
       open: true,
       hot: true,
     },
-    devtool: isProduction ? "source-map" : "eval-source-map",
+    // 本番ビルドではソースマップを出力しない（デバッグ用は開発時のみ）
+    devtool: isProduction ? false : "eval-source-map",
   }
 }
