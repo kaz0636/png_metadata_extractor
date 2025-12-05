@@ -2,6 +2,8 @@
 
 PNGファイルから詳細なメタデータを抽出・解析するモダンなTypeScriptベースのWebアプリケーションです。包括的なチャンク解析、画像情報、ビジュアルプレビュー機能を提供します。
 
+**PWA対応** - ブラウザからインストールしてネイティブアプリのように使用できます。オフラインでも動作します。
+
 ## 機能
 
 - **ドラッグ&ドロップインターフェース**: 視覚的フィードバック付きの簡単なファイルアップロード
@@ -10,6 +12,7 @@ PNGファイルから詳細なメタデータを抽出・解析するモダン�
 - **色解析**: 平均色と主要色の抽出
 - **エクスポート機能**: 抽出されたすべてのメタデータのJSON出力
 - **レスポンシブデザイン**: デスクトップとモバイルデバイスに対応
+- **PWA対応**: インストール可能、オフライン動作対応
 - **TypeScript**: 完全な型安全性とモダンな開発体験
 
 ## 技術スタック
@@ -74,16 +77,19 @@ npm run build
 ```text
 src/
 ├── index.html          # メインHTMLテンプレート
-├── main.ts            # アプリケーションエントリーポイント
-├── styles.scss        # メインスタイルシート
-├── types.ts           # TypeScript型定義
-├── png-analyzer.ts    # PNGファイル解析ロジック
-└── image-preview.ts   # 画像プレビューコンポーネント
+├── main.ts             # アプリケーションエントリーポイント
+├── styles.scss         # メインスタイルシート
+├── types.ts            # TypeScript型定義
+├── png-analyzer.ts     # PNGファイル解析ロジック
+├── image-preview.ts    # 画像プレビューコンポーネント
+├── manifest.json       # PWAマニフェスト
+├── sw.js               # Service Worker
+└── icons/              # PWAアイコン
 
-dist/                  # ビルドファイル（生成される）
-webpack.config.js      # Webpack設定
-tsconfig.json         # TypeScript設定
-package.json          # プロジェクト依存関係とスクリプト
+dist/                   # ビルドファイル（生成される）
+webpack.config.js       # Webpack設定
+tsconfig.json           # TypeScript設定
+package.json            # プロジェクト依存関係とスクリプト
 ```
 
 ## 使用方法
@@ -116,6 +122,14 @@ package.json          # プロジェクト依存関係とスクリプト
 - Chrome/Edge 88+
 - Firefox 85+
 - Safari 14+
+
+## PWAとしてインストール
+
+1. HTTPS環境でアプリにアクセス
+2. ブラウザのアドレスバー右側のインストールアイコンをクリック
+3. 「インストール」を選択
+
+インストール後はデスクトップやホーム画面からアプリとして起動できます。
 
 ## 貢献
 
