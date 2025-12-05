@@ -507,8 +507,30 @@ class PNGMetadataExtractor {
   }
 }
 
+/**
+ * Service Workerを登録する
+ * PWAとしてオフライン動作を可能にする
+ */
+function registerServiceWorker(): void {
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("./sw.js")
+        .then((registration) => {
+          console.log("[PWA] Service Worker 登録成功:", registration.scope)
+        })
+        .catch((error) => {
+          console.error("[PWA] Service Worker 登録失敗:", error)
+        })
+    })
+  }
+}
+
 // アプリケーションの初期化
 // DOMが完全に読み込まれた後にメインクラスをインスタンス化
 document.addEventListener("DOMContentLoaded", () => {
   new PNGMetadataExtractor()
 })
+
+// Service Workerの登録
+registerServiceWorker()

@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#3b82f6">
     <title>PNG Metadata Extractor</title>
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <!-- Favicon -->
+    <link rel="icon" href="icons/favicon.ico">
+    <!-- Apple Touch Icon (iOS対応) -->
+    <link rel="apple-touch-icon" href="icons/web-app-manifest-192x192.png">
     <!-- Removed direct CSS link - webpack will inject the bundled CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- JSNView Library -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsnview/build/index.css">
     <script src="https://cdn.jsdelivr.net/npm/jsnview/build/index.min.js"></script>
 </head>
+
 <body>
     <div class="app">
-         <!-- Header -->
+        <!-- Header -->
         <div class="header">
             <h1>PNG Metadata Extractor</h1>
             <p>Upload a PNG file to extract detailed metadata and chunk information</p>
         </div>
 
-         <!-- Upload Area -->
+        <!-- Upload Area -->
         <div class="upload-card">
             <div class="upload-area" id="uploadArea">
                 <i class="fas fa-file-image upload-icon"></i>
@@ -38,9 +47,9 @@
             <div class="error" id="error" style="display: none;"></div>
         </div>
 
-         <!-- Results -->
+        <!-- Results -->
         <div class="results" id="results" style="display: none;">
-             <!-- Summary Cards -->
+            <!-- Summary Cards -->
             <div class="summary-cards">
                 <div class="summary-card">
                     <i class="fas fa-file-image card-icon blue"></i>
@@ -72,7 +81,7 @@
                 </div>
             </div>
 
-             <!-- Detailed Information -->
+            <!-- Detailed Information -->
             <div class="details-card">
                 <div class="card-header">
                     <h2>Detailed Analysis</h2>
@@ -82,7 +91,7 @@
                     </button>
                 </div>
 
-                 <!-- Tabs -->
+                <!-- Tabs -->
                 <div class="tabs">
                     <div class="tab-list">
                         <button class="tab-button active" data-tab="preview">Preview</button>
@@ -94,7 +103,7 @@
                         <button class="tab-button" data-tab="full-json">Full JSON</button>
                     </div>
 
-                     <!-- Tab Contents -->
+                    <!-- Tab Contents -->
                     <div class="tab-content active" id="tab-preview">
                         <div id="imagePreview"></div>
                     </div>
@@ -129,4 +138,5 @@
 
     <!-- Removed direct script reference - webpack will inject the bundled JavaScript -->
 </body>
+
 </html>
