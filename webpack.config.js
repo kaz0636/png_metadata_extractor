@@ -10,7 +10,7 @@ module.exports = (env, argv) => {
     entry: "./src/main.ts",
     output: {
       path: path.resolve(__dirname, "dist"),
-      filename: isProduction ? "[name].[contenthash].js" : "[name].js",
+      filename: "[name].js",
       clean: true,
     },
     resolve: {
@@ -61,7 +61,7 @@ module.exports = (env, argv) => {
       ...(isProduction
         ? [
           new MiniCssExtractPlugin({
-            filename: "[name].[contenthash].css",
+            filename: "[name].css",
           }),
         ]
         : []),

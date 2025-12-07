@@ -95,7 +95,7 @@ export class ImagePreview {
                 </div>
                 <!-- 画像表示ビューポート -->
                 <div class="image-viewport" id="imageViewport">
-                    <img class="preview-image" id="previewImage" src="${imageUrl}" alt="PNG プレビュー">
+                    <img class="preview-image" id="previewImage" src="${imageUrl}" alt="PNG プレビュー" draggable="false">
                     <div class="zoom-info" id="zoomInfo" style="display: none;">100% ズーム</div>
                 </div>
             </div>
@@ -201,6 +201,8 @@ export class ImagePreview {
     // ドラッグ機能の設定（ズーム時のみ有効）
     viewport.onmousedown = (e: MouseEvent) => {
       if (this.zoom > 1) {
+        // ブラウザのデフォルト動作（画像のD&D）を抑制
+        e.preventDefault()
         this.isDragging = true
         this.dragStart = {
           x: e.clientX - this.position.x,

@@ -5,7 +5,7 @@
 
 // キャッシュ名（更新時はバージョン番号をインクリメント）
 // メジャー.マイナー.パッチ形式で管理
-const CACHE_NAME = 'png-metadata-extractor-v1.1.0';
+const CACHE_NAME = 'png-metadata-extractor-v1.1.1';
 
 // キャッシュ対象のローカルファイル
 const LOCAL_ASSETS = [
