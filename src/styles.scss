@@ -50,11 +50,11 @@ $border-radius-xl: 0.75rem;
   border-radius: $border-radius-md;
   cursor: pointer;
   transition: all 0.2s;
-  
+
   &:hover {
     background-color: #f3f4f6;
   }
-  
+
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -117,13 +117,24 @@ body {
   transition: all 0.3s ease;
 
   &:hover {
-    border-color: #9ca3af;
-    background-color: #f9fafb;
+    border-color: $primary-color;
+    background-color: rgba($primary-color, 0.02);
+
+    .upload-icon {
+      color: $primary-color;
+      transform: scale(1.1);
+    }
   }
 
   &.drag-over {
     border-color: $primary-color;
-    background-color: #eff6ff;
+    background-color: rgba($primary-color, 0.08);
+    border-style: solid;
+
+    .upload-icon {
+      color: $primary-color;
+      transform: scale(1.2);
+    }
   }
 }
 
@@ -131,6 +142,7 @@ body {
   font-size: 3rem;
   color: #9ca3af;
   margin-bottom: $spacing-lg;
+  transition: all 0.3s ease;
 }
 
 .upload-text {
@@ -140,6 +152,22 @@ body {
 
 .upload-button {
   @include button-base;
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  padding: $spacing-md $spacing-xl;
+  font-weight: 500;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #2563eb; // $primary-colorより10%暗い
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba($primary-color, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 
   i {
     margin-right: $spacing-sm;
@@ -149,23 +177,35 @@ body {
 // ローディング表示
 .loading {
   @include flex-center;
-  gap: $spacing-sm;
-  margin-top: $spacing-lg;
+  flex-direction: column;
+  gap: $spacing-md;
+  margin-top: $spacing-xl;
+  padding: $spacing-xl;
   color: $primary-color;
+
+  span {
+    font-weight: 500;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
 }
 
 .spinner {
-  width: $spacing-lg;
-  height: $spacing-lg;
-  border: 2px solid $border-color;
-  border-top: 2px solid $primary-color;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 3px solid $border-color;
+  border-top: 3px solid $primary-color;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
 }
 
 // エラー表示
@@ -184,6 +224,19 @@ body {
   display: flex;
   flex-direction: column;
   gap: $spacing-xl;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+// 解析完了時のフェードインアニメーション
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 // サマリーカード
@@ -199,6 +252,12 @@ body {
   display: flex;
   align-items: center;
   gap: $spacing-md;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.15);
+  }
 }
 
 .card-icon {
@@ -249,7 +308,22 @@ body {
 
 .export-button {
   @include button-base;
+  background-color: $success-color;
+  color: white;
+  border: none;
   font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #059669; // $success-colorより10%暗い
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba($success-color, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 
   i {
     margin-right: $spacing-sm;
@@ -274,19 +348,36 @@ body {
   flex: 1;
   background: transparent;
   border: none;
-  padding: $spacing-sm $spacing-lg;
+  padding: $spacing-sm $spacing-md;
   border-radius: $border-radius-sm;
   cursor: pointer;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: 500;
   color: $text-secondary;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+
+  i {
+    font-size: 0.75rem;
+  }
+
+  &:hover {
+    color: $primary-color;
+    background-color: rgba($primary-color, 0.1);
+  }
 
   &.active {
     background: white;
-    color: $text-primary;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    color: $primary-color;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    i {
+      color: $primary-color;
+    }
   }
 }
 

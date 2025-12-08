@@ -24,24 +24,24 @@
         <!-- Header -->
         <div class="header">
             <h1>PNG Metadata Extractor</h1>
-            <p>Upload a PNG file to extract detailed metadata and chunk information</p>
+            <p>PNGファイルをアップロードして、メタデータとチャンク情報を抽出します</p>
         </div>
 
         <!-- Upload Area -->
         <div class="upload-card">
             <div class="upload-area" id="uploadArea">
                 <i class="fas fa-file-image upload-icon"></i>
-                <p class="upload-text">Drag & drop a PNG file here, or click to select</p>
+                <p class="upload-text">PNGファイルをドラッグ＆ドロップ、またはクリックして選択</p>
                 <button class="upload-button" id="uploadButton">
                     <i class="fas fa-upload"></i>
-                    Choose File
+                    ファイルを選択
                 </button>
                 <input type="file" id="fileInput" accept=".png,image/png" style="display: none;">
             </div>
 
             <div class="loading" id="loading" style="display: none;">
                 <div class="spinner"></div>
-                <span>Analyzing PNG file...</span>
+                <span>PNGファイルを解析中...</span>
             </div>
 
             <div class="error" id="error" style="display: none;"></div>
@@ -54,28 +54,28 @@
                 <div class="summary-card">
                     <i class="fas fa-file-image card-icon blue"></i>
                     <div class="card-content">
-                        <p class="card-label">File Size</p>
+                        <p class="card-label">ファイルサイズ</p>
                         <p class="card-value" id="fileSize">-</p>
                     </div>
                 </div>
                 <div class="summary-card">
                     <i class="fas fa-ruler card-icon green"></i>
                     <div class="card-content">
-                        <p class="card-label">Dimensions</p>
+                        <p class="card-label">画像サイズ</p>
                         <p class="card-value" id="dimensions">-</p>
                     </div>
                 </div>
                 <div class="summary-card">
                     <i class="fas fa-palette card-icon purple"></i>
                     <div class="card-content">
-                        <p class="card-label">Color Type</p>
+                        <p class="card-label">カラータイプ</p>
                         <p class="card-value" id="colorType">-</p>
                     </div>
                 </div>
                 <div class="summary-card">
                     <i class="fas fa-cube card-icon orange"></i>
                     <div class="card-content">
-                        <p class="card-label">Chunks</p>
+                        <p class="card-label">チャンク数</p>
                         <p class="card-value" id="chunkCount">-</p>
                     </div>
                 </div>
@@ -84,23 +84,23 @@
             <!-- Detailed Information -->
             <div class="details-card">
                 <div class="card-header">
-                    <h2>Detailed Analysis</h2>
+                    <h2>詳細解析</h2>
                     <button class="export-button" id="exportButton">
                         <i class="fas fa-download"></i>
-                        Export JSON
+                        JSONエクスポート
                     </button>
                 </div>
 
                 <!-- Tabs -->
                 <div class="tabs">
                     <div class="tab-list">
-                        <button class="tab-button active" data-tab="preview">Preview</button>
-                        <button class="tab-button" data-tab="image-info">Image Info</button>
-                        <button class="tab-button" data-tab="chunks">Chunks</button>
-                        <button class="tab-button" data-tab="metadata">Metadata</button>
-                        <button class="tab-button" data-tab="timestamp">Timestamp</button>
-                        <button class="tab-button" data-tab="raw-data">Raw Data</button>
-                        <button class="tab-button" data-tab="full-json">Full JSON</button>
+                        <button class="tab-button active" data-tab="preview"><i class="fas fa-eye"></i> プレビュー</button>
+                        <button class="tab-button" data-tab="image-info"><i class="fas fa-info-circle"></i> 画像情報</button>
+                        <button class="tab-button" data-tab="chunks"><i class="fas fa-cube"></i> チャンク</button>
+                        <button class="tab-button" data-tab="metadata"><i class="fas fa-tags"></i> メタデータ</button>
+                        <button class="tab-button" data-tab="timestamp"><i class="fas fa-clock"></i> タイムスタンプ</button>
+                        <button class="tab-button" data-tab="raw-data"><i class="fas fa-code"></i> 生データ</button>
+                        <button class="tab-button" data-tab="full-json"><i class="fas fa-file-code"></i> 完全JSON</button>
                     </div>
 
                     <!-- Tab Contents -->
